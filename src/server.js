@@ -3,7 +3,6 @@ import WebSocket from "ws";
 import express from "express";
 
 const app = express();
-const port = 3000;
 
 app.set('view engine', "pug");
 app.set("views", __dirname + "/views");
@@ -27,8 +26,8 @@ wss.on("connection", (socket) => {
     console.log("Connected to Browser✅");
     socket.on("close", onSocketClose);
     socket.on("message", (message) => {
-        sockets.forEach((aSocket) =>
-        aSocket.send(message));
+        console.log(message.toString("utf-8"));
+        sockets.forEach((aSocket) => aSocket.send(message.toString("utf-8")));
     });
 });
 
